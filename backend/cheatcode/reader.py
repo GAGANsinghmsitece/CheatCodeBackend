@@ -58,3 +58,5 @@ def UpdateInfo():
 				form.save()
 			else:
 				print(form.errors)
+
+UpdateInfo()
