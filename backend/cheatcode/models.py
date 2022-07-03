@@ -21,6 +21,7 @@ class Question(models.Model):
 	like = models.IntegerField()
 	unlike = models.IntegerField()
 	tags = models.ManyToManyField(Tag)
+	link = models.CharField(max_length=300,unique=True,blank=False)
 
 	def __str__(self):
 		return self.heading

@@ -28,8 +28,9 @@ class ProblemForm(ModelForm):
 	like = forms.IntegerField(required=True)
 	unlike = forms.IntegerField(required=True)
 	tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(),required=True)
+	link = forms.CharField(required=True,max_length=300)
 
 
 	class Meta:
 		model = Question
-		fields = ['heading','description','difficulty','like','unlike','tags']
+		fields = ['heading','description','difficulty','like','unlike','tags','link']

@@ -36,14 +36,14 @@ def UpdateInfo():
 
 
 		tag_set = Tag.objects.filter(name__in=taglist)
-
 		initialdata={
 			'heading':p['heading'],
 			'description':p['description'],
 			'difficulty':diff,
 			'like':int(p['like']),
 			'unlike':int(p['unlike']),
-			'tags':tag_set
+			'tags':tag_set,
+			'link':p['link']
 		}
 
 		if Question.objects.filter(heading=initialdata['heading']).exists():
@@ -58,5 +58,3 @@ def UpdateInfo():
 				form.save()
 			else:
 				print(form.errors)
-
-UpdateInfo()
