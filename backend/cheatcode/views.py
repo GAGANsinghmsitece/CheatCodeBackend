@@ -17,7 +17,7 @@ class Pagination(PageNumberPagination):
 
 # Create your views here.
 def home_page(request):
-	UpdateInfo()
+	#UpdateInfo()
 	return HttpResponse('<b>Welcome to CheatCode</b>')
 
 class TagList(generics.ListAPIView):
