@@ -8,6 +8,7 @@ cffi==1.15.0
 charset-normalizer==2.0.12
 cryptography==36.0.1
 Django==4.0.5
+django-cors-headers==3.13.0
 django-filter==22.1
 djangorestframework==3.13.1
 h11==0.13.0
