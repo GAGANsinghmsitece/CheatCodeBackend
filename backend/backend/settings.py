@@ -11,19 +11,27 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import config
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME':timedelta(minutes=int(config('ACCESS_TOKEN_LIFETIME'))),
+    'REFRESH_TOKEN_LIFETIME':timedelta(days=int(config('REFRESH_TOKEN_LIFETIME'))),
+    'ROTATE_REFRESH_TOKEN':config('ROTATE_REFRESH_TOKEN'),
+}
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8cct(zcm#7=nj*49=gy)8l@__oj4bf7q9jfi_c=07ulm5925^c'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = ['localhost','cheatcode.pythonanywhere.com','pythonanywhere.com']
 
@@ -133,5 +141,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'cheatcode.utils.exception_handler.CustomExceptionHandler'
+    'EXCEPTION_HANDLER': 'cheatcode.utils.exception_handler.CustomExceptionHandler',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
 }
