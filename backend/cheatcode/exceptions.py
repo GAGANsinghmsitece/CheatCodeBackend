@@ -17,3 +17,7 @@ class InvalidRequest(APIException):
 class UserDoesNotExist(APIException):
 	status_code = 400
 	default_detail = "User does not Exist"
+
+class InvalidParamter(APIException):
+	status_code = 400
+	default_detail = "Invalid Paramter"

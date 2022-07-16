@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 
-
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = User
@@ -18,6 +17,8 @@ class TagSerializer(serializers.ModelSerializer):
 
 class QuestionSerializer(serializers.ModelSerializer):
 	tags = TagSerializer(many=True,read_only =True)
+	is_complete = serializers.BooleanField()
+	difficulty = serializers.CharField(source='get_difficulty_display')
 	class Meta:
 		model = Question
 		fields = '__all__'
