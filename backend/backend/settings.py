@@ -32,6 +32,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
+SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT')
 
 ALLOWED_HOSTS = ['localhost','cheatcode.pythonanywhere.com','pythonanywhere.com']
 
