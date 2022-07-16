@@ -24,9 +24,6 @@ from cheatcode.models import Tag, Question, Profile
 from cheatcode.serializers import TagSerializer, QuestionSerializer, SubmittedSerializer, ProfileSerializer, QuestionWithoutTagsSerializer, RegisterSerializer
 from cheatcode.exceptions import TagDoesNotExist, InvalidQuestion, InvalidRequest, UserDoesNotExist, InvalidParamter
 
-def test(request):
-	return render(request, "email/password_reset.html")
-
 @receiver(reset_password_token_created)
 def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
     """
@@ -52,7 +49,7 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
     message = render_to_string("email/password_reset.html",context)
     email_to = context['email']
     email = EmailMessage(mail_subject,message,to=[email_to])
-    email.mixed_subtype = "html"
+    email.content_subtype = "html"
     email.send()
     # render email text
     #email_html_message = render_to_string('email/user_reset_password.html', context)

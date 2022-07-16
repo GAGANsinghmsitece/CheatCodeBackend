@@ -13,6 +13,5 @@ urlpatterns =[
 	path('completed',views.SubmitQuestion.as_view(),name='SubmitQuestion'),
 	path('user/<slug:username>',views.UserDetails.as_view(),name='UserDetail'),
 	path('user/<slug:username>/completed',views.CompletedQuestions.as_view(),name='UserDetailCompleted'),
-	path('signup',views.UserSignup.as_view(),name='UserSignup'),
-	path('password',views.test,name='Test')
+	path('signup',views.UserSignup.as_view(),name='UserSignup')
 ]
