@@ -70,6 +70,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3030',
 ]
 
+CORS_ALLOW_HEADERS = ['Authorization']
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
