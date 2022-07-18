@@ -84,7 +84,7 @@ class QuestionList(generics.ListAPIView):
 	def get_queryset(self):
 		difficulty_level = self.request.GET.get('difficulty',None)
 		if difficulty_level == None:
-			completed_questions = Question.objects.filter(profile=self.request.user.profile)
+			completed_questions = Question.objects.filter(profile__user=self.request.user)
 			all_questions = Question.objects.annotate(is_complete=Case(
 				When(
 					pk__in=completed_questions.values('pk'), 
@@ -95,7 +95,7 @@ class QuestionList(generics.ListAPIView):
 			).prefetch_related('tags')
 			return all_questions
 		elif difficulty_level == "1" or difficulty_level == "2" or difficulty_level=="3":
-			completed_questions = Question.objects.filter(profile=self.request.user.profile)
+			completed_questions = Question.objects.filter(profile__user=self.request.user)
 			all_questions = Question.objects.filter(difficulty=difficulty_level).annotate(is_complete=Case(
 				When(
 					pk__in=completed_questions.values('pk'), 
@@ -116,7 +116,7 @@ class TopQuestionList(generics.ListAPIView):
 	def get_queryset(self):
 		difficulty_level = self.request.GET.get('difficulty',None)
 		if difficulty_level == None:
-			completed_questions = Question.objects.filter(profile=self.request.user.profile)
+			completed_questions = Question.objects.filter(profile__user=self.request.user)
 			all_questions = Question.objects.all().annotate(is_complete=Case(
 				When(
 					pk__in=completed_questions.values('pk'), 
@@ -125,11 +125,11 @@ class TopQuestionList(generics.ListAPIView):
 				default=Value(False), 
 				output_field=BooleanField()),
 				votes_difference=Count('like')-Count('unlike'),
-			).order_by('votes_difference').prefetch_related('tags')
+			).order_by('votes_difference').prefetch_related('tags')[:500]
 			print(all_questions)
 			return all_questions
 		elif difficulty_level == "1" or difficulty_level == "2" or difficulty_level=="3":
-			completed_questions = Question.objects.filter(profile=self.request.user.profile)
+			completed_questions = Question.objects.filter(profile__user=self.request.user)
 			all_questions = Question.objects.filter(difficulty=difficulty_level).annotate(is_complete=Case(
 				When(
 					pk__in=completed_questions.values('pk'), 
@@ -138,7 +138,7 @@ class TopQuestionList(generics.ListAPIView):
 				default=Value(False), 
 				output_field=BooleanField()),
 				votes_difference=Count('like')-Count('unlike'),
-			).order_by('votes_difference').prefetch_related('tags')
+			).order_by('votes_difference').prefetch_related('tags')[:500]
 			return all_questions
 		else:
 			raise InvalidParamter()
@@ -152,7 +152,8 @@ class QuestionsByTagList(generics.ListAPIView):
 	def get_queryset(self):
 		try:
 			tagid = self.kwargs.get(self.lookup_param)
-			queryset =  Question.objects.filter(tag__id=tagid).annotate(is_complete=Case(
+			completed_questions = Question.objects.filter(profile__user=self.request.user)
+			queryset = Question.objects.filter(tags__id=tagid).annotate(is_complete=Case(
 				When(
 					pk__in=completed_questions.values('pk'), 
 					then=Value(True)
@@ -160,7 +161,16 @@ class QuestionsByTagList(generics.ListAPIView):
 				default=Value(False), 
 				output_field=BooleanField())
 			).prefetch_related('tags')
-
+			'''
+			queryset =  Question.objects.all().annotate(is_complete=Case(
+				When(
+					pk__in=completed_questions.values('pk'), 
+					then=Value(True)
+				),
+				default=Value(False), 
+				output_field=BooleanField())
+			).prefetch_related('tags')
+			'''
 			return queryset
 		except:
 			TagDoesNotExist()
