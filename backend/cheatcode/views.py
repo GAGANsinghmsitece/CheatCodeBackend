@@ -152,7 +152,15 @@ class QuestionsByTagList(generics.ListAPIView):
 	def get_queryset(self):
 		try:
 			tagid = self.kwargs.get(self.lookup_param)
-			queryset =  Question.objects.filter(tags__id=tagid).prefetch_related('tags')
+			queryset =  Question.objects.filter(tag__id=tagid).annotate(is_complete=Case(
+				When(
+					pk__in=completed_questions.values('pk'), 
+					then=Value(True)
+				),
+				default=Value(False), 
+				output_field=BooleanField())
+			).prefetch_related('tags')
+
 			return queryset
 		except:
 			TagDoesNotExist()
