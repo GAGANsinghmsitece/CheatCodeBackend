@@ -70,7 +70,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
 
-CORS_ALLOW_HEADERS = ['Authorization']
+CORS_ALLOW_HEADERS = ['*']
 
 ROOT_URLCONF = 'backend.urls'
 
