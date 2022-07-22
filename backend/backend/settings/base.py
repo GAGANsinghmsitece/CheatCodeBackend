@@ -30,11 +30,9 @@ SIMPLE_JWT = {
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG')
-SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT')
 
-ALLOWED_HOSTS = ['localhost','cheatcode.pythonanywhere.com','pythonanywhere.com']
+
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -49,7 +47,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'cheatcode',
     'rest_framework',
-    'silk',
     'django_rest_passwordreset',
 ]
 
@@ -57,7 +54,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'silk.middleware.SilkyMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -71,8 +67,6 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_HEADERS = ['*']
-
-ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
     {
