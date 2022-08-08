@@ -65,6 +65,7 @@ def GetProblemDetails(problem_link,browser):
 
 	if headingContainer is not None and descriptionContainer is not None and difficultyContainer is not None and likeContainer is not None and tags_container is not None:
 		heading = headingContainer.text
+		print(descriptionContainer.findChildren()[0])
 		description = str(descriptionContainer.findChildren())
 		difficulty = difficultyContainer.findChildren()[0].text
 		like = likeContainer[0].text

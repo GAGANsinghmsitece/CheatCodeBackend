@@ -1,5 +1,5 @@
 {
-    "0": "https://leetcode.com/problems/wiggle-subsequence/",
+    "0": "https://leetcode.com/problems/partition-list/",
     "1": "https://leetcode.com/problems/two-sum",
     "2": "https://leetcode.com/problems/add-two-numbers",
     "3": "https://leetcode.com/problems/longest-substring-without-repeating-characters",
@@ -483,7 +483,7 @@
     "481": "https://leetcode.com/problems/logical-or-of-two-binary-grids-represented-as-quad-trees",
     "482": "https://leetcode.com/problems/maximum-depth-of-n-ary-tree",
     "483": "https://leetcode.com/problems/subarray-sum-equals-k",
-    "484": "https://leetcode.com/problems/array-partition-i",
+    "484": "https://leetcode.com/problems/array-partition",
     "485": "https://leetcode.com/problems/binary-tree-tilt",
     "486": "https://leetcode.com/problems/find-the-closest-palindrome",
     "487": "https://leetcode.com/problems/array-nesting",
