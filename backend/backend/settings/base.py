@@ -65,7 +65,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'https://hilarious-jelly-ebfa67.netlify.app',
-    'https://cheat-code.netlify.app/'
+    'https://cheat-code.netlify.app'
 ]
 
 CORS_ALLOW_HEADERS = ['*']
